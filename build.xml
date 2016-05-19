@@ -1,0 +1,36 @@
+<project basedir="." name="Go Euro test">
+    <property name="src.dir" value="${basedir}/java/src"/>
+    <property name="classes.dir" value="${basedir}/java/classes/main"/>
+    <property name="lib.dir" value="${basedir}/lib"/>
+    <property name="build.dir" value="${basedir}/build"/>
+    <property name="goeuro_test.jar" value="${build.dir}/goeuro_test.jar"/>
+
+    <path id="goeuro_test.classpath">
+        <file file="${goeuro_test.jar}"/>
+        <fileset dir="${lib.dir}">
+            <include name="*.jar" />
+        </fileset>
+    </path>
+
+    <target name="clean" description="cleans build output">
+        <delete dir="${classes.dir}" quiet="true" includeemptydirs="true"/>
+        <delete dir="${build.dir}" quiet="true" includeemptydirs="true"/>
+    </target>
+
+    <target name="build" description="sets up the environment for test execution">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <javac debug="true"
+               srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeAntRuntime="false"
+               classpathref="goeuro_test.classpath"/>
+        <jar basedir="${classes.dir}" jarfile="${goeuro_test.jar}"/>
+    </target>
+
+    <target name="run-test" description="run command-line test">
+        <java classname="goeuro.travel.test.${test}"
+                failonerror="true"
+                classpathref="goeuro_test.classpath"/>
+    </target>
+</project>
