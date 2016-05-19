@@ -54,20 +54,20 @@ public class Planner {
 		ArrayList<Integer> fareListSorted = new ArrayList<>();
 
 		// travel from
-		driver.findElement(travelFrom).sendKeys(fromCity);
+		driver.findElement(By.id(travelFrom)).sendKeys(fromCity);
 
 		// travel to
-		driver.findElement(travelTo).sendKeys(toCity);
+		driver.findElement(By.id(travelTo)).sendKeys(toCity);
 
 		WebElement elementSearch = wait.until(ExpectedConditions
-				.elementToBeClickable(travelSearch));
+				.elementToBeClickable(By.id(travelSearch)));
 
 		// click search
-		driver.findElement(travelSearch).sendKeys(Keys.ENTER);
+		driver.findElement(By.id(travelSearch)).sendKeys(Keys.ENTER);
 
 		// Wait for search to complete
 		WebElement elementSelect = wait.until(ExpectedConditions
-				.elementToBeClickable(selectButton));
+				.elementToBeClickable(By.linkText(selectButton)));
 
 		for (int i = 1; i < 25; i++) {
 			String fareXpath = baseXpath + "[" + i + "]" + currencyXpath;
