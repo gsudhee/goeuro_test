@@ -21,7 +21,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Planner {
 	private static String fromCity = "Berlin, Germany";
 	private static String toCity = "Prague, Czech Republic";
-	private static String searchButton = "search-form__submit-btn";
+	private static String travelFrom = "from_filter";
+	private static String travelTo = "to_filter";
+	private static String travelSearch = "search-form__submit-btn";
 	private static String selectButton = "Select";
 	private static String baseXpath = "//div[@id='results-train']/div[@class='custom']/div";
 	private static String currencyXpath = "/descendant::span[@class='currency-beforecomma']";
@@ -33,7 +35,6 @@ public class Planner {
 		driver = new FirefoxDriver();
 		wait = new WebDriverWait(driver, 30);
 		driver.get("http://goeuro.com/");
-
 		boolean result;
 		try {
 			result = CheapestTrainFare();
@@ -53,20 +54,20 @@ public class Planner {
 		ArrayList<Integer> fareListSorted = new ArrayList<>();
 
 		// travel from
-		driver.findElement(By.id("from_filter")).sendKeys(fromCity);
+		driver.findElement(travelFrom).sendKeys(fromCity);
 
 		// travel to
-		driver.findElement(By.id("to_filter")).sendKeys(toCity);
+		driver.findElement(travelTo).sendKeys(toCity);
 
 		WebElement elementSearch = wait.until(ExpectedConditions
-				.elementToBeClickable(By.id(searchButton)));
+				.elementToBeClickable(travelSearch));
 
 		// click search
-		driver.findElement(By.id(searchButton)).sendKeys(Keys.ENTER);
+		driver.findElement(travelSearch).sendKeys(Keys.ENTER);
 
 		// Wait for search to complete
 		WebElement elementSelect = wait.until(ExpectedConditions
-				.elementToBeClickable(By.linkText(selectButton)));
+				.elementToBeClickable(selectButton));
 
 		for (int i = 1; i < 25; i++) {
 			String fareXpath = baseXpath + "[" + i + "]" + currencyXpath;
