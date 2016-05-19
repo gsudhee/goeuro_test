@@ -17,7 +17,7 @@
         <delete dir="${build.dir}" quiet="true" includeemptydirs="true"/>
     </target>
 
-    <target name="build" description="sets up the environment for test execution">
+    <target name="build" depends="clean" description="sets up the environment for test execution">
         <mkdir dir="${classes.dir}"/>
         <mkdir dir="${build.dir}"/>
         <javac debug="true"
