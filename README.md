@@ -2,7 +2,9 @@
 Welcome to goeuro_test project!
 
 Pre requisites:
-Java and ant must be installed before running the project.
+Java, Ant and Firefox browser must be installed before running the project. 
+
+Has been developed and tested on Linux(Ubuntu).
 
 Steps to run the test:
 
